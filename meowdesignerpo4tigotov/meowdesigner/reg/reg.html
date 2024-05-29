@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>MAY designer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #666;
+            color: #fff;
+            border-radius: 15px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background-color: #888;
+        }
+
+        hr {
+            border: 1px solid #555;
+            margin-bottom: 25px;
+        }
+
+        button {
+            background-color: #55a;
+            color: #fff;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+
+        .cancelbtn {
+            background-color: #f44336;
+        }
+
+        .signupbtn {
+            background-color: #4CAF50;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .games {
+            display: inline-block;
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .games:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <a class="games" href="first/index.html">АИМка</a>
+    <a class="games" href="second/quizz.html">Викторина на C</a>
+    <a class="games" href="third/math.html">Быстрый счёт </a>
+
+    <form id="registrationForm" action="action_page.php" style="border:1px solid #ccc">
+        <div class="container">
+            <h1>Регистрация</h1>
+            <p>Пожалуйста, заполните форму для создания учетной записи.</p>
+            <hr>
+
+            <label for="email"><b>Имя и Фамилия (или email)</b></label>
+            <input type="text" id="emailInput" placeholder="Введите Имя и Фамилию" name="email" required>
+
+            <label for="psw"><b>Пароль (должен содержать цифры и символы)</b></label>
+            <input type="password" id="passwordInput" placeholder="Введите пароль" name="psw" required pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" title="Пароль должен содержать цифры и символы (минимум 6 символов)">
+
+            <label for="psw-repeat"><b>Повторите пароль</b></label>
+            <input type="password" id="passwordRepeatInput" placeholder="Повторите пароль" name="psw-repeat" required>
+
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запомнить меня
+            </label>
+
+        <div class="clearfix">
+            <button type="button" id="registerBtn" class="signupbtn">Зарегистрироваться</button>
+        </div>
+    </form>
+    <script>
+        const registrationForm = document.getElementById('registrationForm');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordRepeatInput = document.getElementById('passwordRepeatInput');
+        const registerBtn = document.getElementById('registerBtn');
+
+        registerBtn.addEventListener('click', function() {
+            if (passwordInput.value !== passwordRepeatInput.value) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+
+            alert('Регистрация прошла успешно!');
+            registrationForm.reset(); 
+        });
+    </script>
+</body>
+</html>

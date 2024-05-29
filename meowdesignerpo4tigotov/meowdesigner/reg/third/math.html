@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Быстрый калькулятор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            margin: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #666;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background-image: linear-gradient(to bottom, #4CAF50, #388E3C);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question" id="question">Посчитайте: </div>
+        <input type="number" id="answer" placeholder="Ответ">
+        <button onclick="checkAnswer()">Проверить</button>
+        <br>
+        <a class="glavnaya" href="../reg.html">На главную</a>
+        <p id="timer"></p>
+    </div>
+
+    <script>
+        let timer;
+        let correctAnswers = 0;
+        let correctAnswer;
+
+    function generateQuestion() {
+    const examples = [ { num1: 5, num2: 3, correctAnswer: 8 },
+                       { num1: 2, num2: 7, correctAnswer: 9 },
+                       { num1: 4, num2: 2, correctAnswer: 6 },
+                       { num1: 1, num2: 3, correctAnswer: 4 },
+                       { num1: 2, num2: 2, correctAnswer: 4 },
+                       { num1: 1, num2: 2, correctAnswer: 3 },
+                       { num1: 1, num2: 1, correctAnswer: 2 },
+                       { num1: 5, num2: 5, correctAnswer: 10 },
+                       { num1: 7, num2: 2, correctAnswer: 9 },
+                       { num1: 32, num2: 30, correctAnswer: 62 },
+                       { num1: 21, num2: 8, correctAnswer: 29 },
+                       { num1: 44, num2: 2, correctAnswer: 46 } ];
+                
+    const selectedExample = examples.shift(); // Берем первый пример из массива
+    const { num1, num2, correctAnswer } = selectedExample;
+  
+    document.getElementById("question").textContent = `Посчитайте: ${num1} + ${num2}`;
+    document.getElementById("answer").value = "";
+    document.getElementById("answer").focus();
+  
+    return correctAnswer;
+    }   
+
+        function generateQuestion() {
+            const examples = [
+                { num1: 5, num2: 3, correctAnswer: 8 },
+                { num1: 2, num2: 7, correctAnswer: 9 },
+                { num1: 4, num2: 2, correctAnswer: 6 },
+                { num1: 1, num2: 3, correctAnswer: 4 },
+                { num1: 2, num2: 9, correctAnswer: 11 },
+                { num1: 1, num2: 2, correctAnswer: 3 },
+                { num1: 1, num2: 1, correctAnswer: 2 },
+                { num1: 5, num2: 5, correctAnswer: 10 },
+                { num1: 7, num2: 2, correctAnswer: 9 },
+                { num1: 32, num2: 30, correctAnswer: 62 },
+                { num1: 21, num2: 8, correctAnswer: 29 },
+                { num1: 44, num2: 2, correctAnswer: 46 }
+            ];
+        
+            const selectedExample = examples[Math.floor(Math.random() * examples.length)];
+            const { num1, num2, correctAnswer } = selectedExample;
+        
+            document.getElementById("question").textContent = `Посчитайте: ${num1} + ${num2}`;
+            document.getElementById("answer").value = "";
+            document.getElementById("answer").focus();
+        
+            return correctAnswer;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById("answer").value);
+        
+            if (userAnswer === correctAnswer) {
+                alert("Правильно! Молодец!");
+                correctAnswers++;
+            } else {
+                alert("Неправильно. Попробуйте еще раз.");
+            }
+        
+            correctAnswer = generateQuestion(); // Генерируем следующий вопрос
+        }
+
+        function startTimer(seconds) {
+            let timeLeft = seconds;
+            timer = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    endGame();
+                } else {
+                    document.getElementById("timer").textContent = `Время: ${timeLeft} сек`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+        }
+
+        function endGame() {
+            alert(`Игра окончена! Количество правильных ответов: ${correctAnswers}`);
+            // Здесь можно добавить анимацию 
+        }
+
+        generateQuestion();
+        startTimer(30); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Викторина на С</title>
+
+    <style>
+      body {
+        background-color: #333;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      .main {
+        background-color: #222;
+        max-width: 800px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .quiz__head {
+        background-color: #3498db;
+        color: #fff;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .button {
+        background-color: #2980b9;
+        color: #fff;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+
+      .button_wrong {
+        background-color: #e74c3c;
+      }
+
+      .button_correct {
+        background-color: #2ecc71;
+      }
+
+      .button:hover {
+        background-color: #1a5276;
+      }
+
+      .footer__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #3498db;
+        color: #fff;
+        padding: 15px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      a.button-home {
+        background-color: #2980b9;
+        color: #fff;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+      }
+
+      a.button-home:hover {
+        background-color: #1a5276;
+      }
+      .footer-link {
+        text-align: center;
+        display: block;
+        font-size: 20px;
+        color: #fff;
+        text-decoration: none;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <main class="main">
+        <div class="quiz__head">
+          <div class="head__content" id="head">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ducimus
+            odit accusamus, illum quas magni provident odio praesentium commodi
+            sint, porro harum, minus cupiditate architecto culpa aut ex dolore
+            officia.
+          </div>
+        </div>
+        <div class="quiz__body">
+          <div class="buttons">
+            <div class="buttons__content" id="buttons">
+              <button class="button">Default button</button><br />
+              <button class="button button_wrong">Wrong answer</button><br />
+              <button class="button button_correct">Correct answer</button
+              ><br />
+              <button class="button button_passive">Unclicked button</button
+              ><br />
+            </div>
+          </div>
+
+          <div class="quiz__footer">
+            <div class="footer__content" id="pages">0 / 0</div>
+            <a href="../reg.html">На главную</a>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="mozg.js"></script>
+  </body>
+</html>

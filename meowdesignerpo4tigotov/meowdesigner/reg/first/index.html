@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="screen">
+      <h1>Aim Training</h1>
+      <a href="#" class="start" id="start">Начать игру</a>
+      <a class="glavnaya" href="../reg.html">На главную</a>
+    </div>
+
+    <div class="screen">
+      <h1>Выберите время</h1>
+      <ul class="time-list" id="time-list">
+        <li>
+            <button class="time-btn" data-time="30">
+                30 сек
+            </button>
+        </li>
+        <li>
+            <button class="time-btn" data-time="60">
+                60 сек
+            </button>
+        </li>
+        <li>
+            <button class="time-btn" data-time="90">
+                90 сек
+            </button>
+        </li>
+        <li>
+            <button class="time-btn" data-time="120">
+                120 сек
+            </button>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="screen">
+      <h3>Осталось <span id="time">00:00</span></h3>
+      <div class="board" id="board"></div>
+      <br>
+      <a class="glavnaya" href="../reg.html">На главную</a>
+    </div>
+    
+  </body>
+    <style>@import url("https://fonts.googleapis.com/css?family=Khula&display=swap");
+
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          color: #fff;
+          font-family: "Khula", sans-serif;
+          height: 100vh;
+          overflow: hidden;
+          margin: 0;
+          text-align: center;
+        }
+        
+        a {
+          color: #fff;
+          text-decoration: none;
+          text-shadow: 1px 1px 2px rgb(133, 133, 133), 0 0 1em blue, 0 0 0.2em blue;
+        }
+        
+        a:hover {
+          color: #ffffff;
+        }
+        
+        .start {
+          font-size: 1.5rem;
+          transition: 0.5s;
+        }
+        
+        .start:hover {
+          font-size: 1.8em;
+        }
+
+        .glavnaya{
+          transition: 0.5s;
+        }
+
+        .glavnaya:hover{
+          transform: scale(1.2);
+        }
+
+        h1 {
+          line-height: 1.4;
+          font-size: 4rem;
+          text-shadow: 1px 1px 2px rgb(94, 94, 94), 0 0 1em blue, 0 0 0.2em blue;
+        }
+        
+        .screen {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          width: 100vw;
+          transition: margin 0.5s ease-out;
+          background: linear-gradient(90deg, #000000 0%, #06002b 100%);
+          background-size: 200%;
+          animation: gradient 5s ease infinite;
+        }
+        
+        @keyframes gradient{
+          0%{
+            background-position: 0 50%;
+          }
+          50%{
+            background-position: 100% 50%;
+          }
+          100%{
+            background-position: 0 50%;
+          }
+        }
+
+        .screen.up {
+          margin-top: -100vh;
+        }
+        
+        .time-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          list-style: none;
+          padding: 0;
+        }
+        
+        .time-list li {
+          margin: 10px;
+        }
+        
+        .time-btn {
+          background-color: transparent;
+          border: 2px solid #c0c0c0;
+          color: #fff;
+          cursor: pointer;
+          font-family: inherit;
+          padding: 0.5rem 1rem;
+          font-size: 1.5rem;
+        }
+        
+        .time-btn:hover {
+          border: 2px solid #16d9e3;
+          color: #16d9e3;
+        }
+        
+        .hide {
+          opacity: 0;
+        }
+        
+        .primary {
+          color: #16d9e3;
+        }
+        
+        .board {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          width: 500px;
+          height: 500px;
+          background: linear-gradient(118.38deg, #030303 -4.6%, #111111 200.44%);
+          box-shadow: -8px -8px 20px #616161, 10px 7px 20px #959596;
+          border-radius: 30px;
+          border-style: solid;
+          border-color: #ffffff;
+          overflow: hidden;
+        }
+        
+        .circle {
+          background: linear-gradient(90deg, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);
+          position: absolute;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        </style>
+        <script>
+            const startBtn = document.querySelector('#start')
+            const screens = document.querySelectorAll('.screen')
+            const timeBtns = document.querySelector('#time-list')
+            const timeEl =  document.querySelector('#time')
+            const board =  document.querySelector('#board')
+            const colors = [['#61B83F','#6ea857'],['#FFEB33','#fff06d'],['#fd6363','#ff8080']]
+            let time = 0
+            let timeR = 0
+            let score = 0
+            startBtn.addEventListener('click',event=>{
+            
+                event.preventDefault()
+                screens[0].classList.add('up')
+            })
+
+            timeBtns.addEventListener('click',event=>{
+                if (event.target.classList.contains('time-btn')){
+                    time = +event.target.dataset.time 
+                    timeR = +event.target.dataset.time
+                    screens[1].classList.add('up')
+                    startGame()
+                }
+            })
+            board.addEventListener('click',event=>{
+                if (event.target.classList.contains('circle')){
+                    score++
+                    event.target.remove()
+                    createRandomCircle()
+                }
+            })
+
+            function startGame(){
+                setTime(time)
+                createRandomCircle()
+                setInterval(()=>{
+                    if (time === 0)
+                        finishGame()
+                    else
+                        setTime(--time)
+                },1000)
+              
+            }
+            function setTime(time){
+                timeEl.innerHTML = '00:'+String(time).padStart(2,'0') 
+            }
+            function finishGame(){
+                board.innerHTML = '<h1>Cчет: <span class="primary">'+score+'</span></h1>'
+                if(score >= timeR)
+                    field.innerHTML = '<h2>Cчет: <span class="primary">'+score+'</span><br>Отличный результат</h2>'
+                else
+                    field.innerHTML = '<h2>Cчет: <span class="primary">'+score+'</span><br>Попробуйте еще раз</h2>'
+            }
+
+            function createRandomCircle(){
+              const circle = document.createElement('div')
+              const size = getRandomNumber(10,60)
+              const {width,height} = board.getBoundingClientRect()
+              // Math.round(size/2)верхний левы угол
+              const x = getRandomNumber(Math.round(size/2),width-size) 
+              const y = getRandomNumber(Math.round(size/2),height-size)
+              circle.style.width = size+'px'
+              circle.style.height = size+'px'
+              circle.style.top = y+'px'
+              circle.style.left = x+'px'
+              circle.style.background = getRandomGradient()
+              circle.classList.add('circle')
+              board.append(circle)
+            }
+
+            function getRandomNumber(min,max){
+                return Math.round(Math.random() * (max - min) + min)
+            }
+            
+            function getRandomGradient(){
+                let index = Math.floor(Math.random()*colors.length)
+                return 'linear-gradient(90deg, '+colors[index][0]+' 0%, '+colors[index][1]+' 100%)' 
+            }
+        </script>
+</html>
