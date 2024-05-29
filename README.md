@@ -1,2 +1,2 @@
-# YAUBILALAHA
+#
 mi umnie
