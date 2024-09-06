@@ -1,6 +1,12 @@
-#include <cmath>
-int distance( int n ) {
-  if ( n == 1 ) return 0;
-  const int m( ceil( sqrt( n )) / 2 );
-  return abs( int( n - pow( 2 * m - 1, 2 )) % ( 2 * m ) - m ) + m;
+#include <string>
+#include <fmt/core.h>
+#include <string_view>
+
+std::string restore_brackets(std::string_view s)
+{
+if (s.front() != '[') return { s.front() };
+const auto left = restore_brackets(s.substr(1));
+const auto right = restore_brackets(s.substr(1 + left.length() - left.length() / 3));
+return fmt::format("[{}{}]", left, right);
 }
+
