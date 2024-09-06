@@ -1,12 +1,12 @@
 #include <string>
-#include <fmt/core.h>
 #include <string_view>
 
-std::string restore_brackets(std::string_view s)
-{
-if (s.front() != '[') return { s.front() };
-const auto left = restore_brackets(s.substr(1));
-const auto right = restore_brackets(s.substr(1 + left.length() - left.length() / 3));
-return fmt::format("[{}{}]", left, right);
+std::string to_weird_case(std::string_view str) {
+  std::string res{str}; int j{};
+  for(size_t i{}; i < str.size(); ++i){
+    if(str[i] == ' ') j = 0;
+    (j % 2) ? res[i] = tolower(res[i]) : res[i] = toupper(res[i]);
+    if((static_cast<int>(str[i]) >= 65 && static_cast<int>(str[i]) <= 90) || (static_cast<int>(str[i]) >= 97 && static_cast<int>(str[i]) <= 122)) ++j;
+  }
+  return res;
 }
-
